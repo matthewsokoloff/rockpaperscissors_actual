@@ -111,6 +111,16 @@ console.assert(getRoundResult("SCISSORS", "ROCK") === "computer");
 console.assert(getRoundResult("ROCK", "PAPER") === "computer");
 console.assert(getRoundResult("PAPER", "SCISSORS") === "computer");
 
+// test computer choice
+for (let i = 0; i < 100; i++) {
+    let choice = getComputerChoice();
+
+    console.assert(
+        choice === "ROCK" || choice === "PAPER" || choice === "SCISSORS",
+        "getComputerChoice returned invalid choice: " + choice
+    );
+}
+
 console.log("All tests passed!");
 
 // start game
