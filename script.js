@@ -25,6 +25,10 @@ function getComputerChoice() {
 
 function getUserChoice() {
     let userChoice = prompt("Please enter rock, paper, or scissors:");
+    if (userChoice === null) {
+        alert("that is an invalid input. Please input rock, paper, or scissors.");
+        return getUserChoice();
+    }
     userChoice = userChoice.toUpperCase();
     if (userChoice === "ROCK" || userChoice === "PAPER" || userChoice === "SCISSORS") {
         return userChoice;
@@ -55,6 +59,12 @@ let humanScore = 0;
 let computerScore = 0;
 
 function playRound() {
+    let humanChoice = getUserChoice();
+    console.log("human choice: " + humanChoice);
+
+    let computerChoice = getComputerChoice();
+    console.log("computer choice: " + computerChoice);
+
     let result = getRoundResult(humanChoice, computerChoice);
 
     if (result === "tie") {
@@ -68,6 +78,7 @@ function playRound() {
         console.log("you lose this round");
         computerScore++;
     }
+
     console.log("current score: you " + humanScore + " - computer " + computerScore);
 }
 
@@ -87,5 +98,21 @@ function playGame() {
     }
 }
 
+// tests
+console.assert(getRoundResult("ROCK", "ROCK") === "tie");
+console.assert(getRoundResult("PAPER", "PAPER") === "tie");
+console.assert(getRoundResult("SCISSORS", "SCISSORS") === "tie");
+
+console.assert(getRoundResult("ROCK", "SCISSORS") === "human");
+console.assert(getRoundResult("PAPER", "ROCK") === "human");
+console.assert(getRoundResult("SCISSORS", "PAPER") === "human");
+
+console.assert(getRoundResult("SCISSORS", "ROCK") === "computer");
+console.assert(getRoundResult("ROCK", "PAPER") === "computer");
+console.assert(getRoundResult("PAPER", "SCISSORS") === "computer");
+
+console.log("All tests passed!");
+
+// start game
 console.log("Welcome to Rock, Paper, Scissors!");
 playGame();
